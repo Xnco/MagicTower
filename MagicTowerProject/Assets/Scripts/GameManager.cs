@@ -48,7 +48,12 @@ namespace Core
                 string[] allLines = ta.text.Split('\n'); 
                 for (int j = 0; j < allLines.Length; j++)
                 {
-                    map[i, j] = int.Parse(allLines[j]);
+                    Debug.Log(allLines[j]);
+                    string[] text = allLines[j].Split(',');
+                    for (int k = 0; k < text.Length; k++)
+                    {
+                        map[j, k] = int.Parse(text[k]);
+                    }
                 }
 
                 Floor floor = new Floor(num, map);

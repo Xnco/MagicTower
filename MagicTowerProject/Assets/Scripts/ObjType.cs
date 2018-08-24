@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Core{
     public enum ObjType
     {
-        None,
+        None = 0,
         Road, 
         Wall,
         Water,

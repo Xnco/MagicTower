@@ -46,7 +46,11 @@ namespace Core
             {
                 for (int j = 0; j < floor.map.GetLength(1); j++)
                 {
-                    
+                    GameObject prefab = Resources.Load<GameObject>("Prefabs/" + ((ObjType)floor.map[i, j]).ToString());
+                    GameObject tmp = Instantiate(prefab);
+                    tmp.transform.SetParent(this.transform);
+                    tmp.transform.localPosition = new Vector3(j, -i, 0);
+                    tmp.transform.localScale = Vector3.one * 3.15f;
                 }
             }
 
@@ -55,10 +59,10 @@ namespace Core
         void GetObj(int num)
         {
             ObjType type = (ObjType)num;
-            List<GameObject> tmpList;
-            if (pool.TryGetValue(type, out tmpList))
+            ObjectPool<GameObject> tmpPool;
+            if (pool.TryGetValue(type, out tmpPool))
             {
-
+                 tmpPool.Get();
             } 
         }
     }
