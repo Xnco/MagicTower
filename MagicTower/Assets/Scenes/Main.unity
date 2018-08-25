@@ -3311,6 +3311,11 @@ Prefab:
       propertyPath: y
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114131489745525026, guid: fb98fca0ecb59164dba4935df3ef5d3c,
+        type: 2}
+      propertyPath: moveCD
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb98fca0ecb59164dba4935df3ef5d3c, type: 2}
   m_IsPrefabAsset: 0

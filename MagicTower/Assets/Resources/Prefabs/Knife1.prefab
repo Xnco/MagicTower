@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4439538741906674}
   - component: {fileID: 212999375885678586}
+  - component: {fileID: 114449151071362944}
   m_Layer: 0
   m_Name: Knife1
   m_TagString: Untagged
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114449151071362944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415259359888796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0ce09f723473ea4996d7a3b5eefb9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mType: 102
 --- !u!212 &212999375885678586
 SpriteRenderer:
   m_ObjectHideFlags: 1

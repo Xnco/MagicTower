@@ -27,7 +27,6 @@ public class MapManager
     public int[,] curMap; // 当前所在楼层具体的 Map
 
     public event IntDelegate onPickUpEvent; // 使用道具的事件 
-    public event IntDelegate onOpenDoorEvent; // 开门事件
 
     private MapManager()
     {
@@ -91,7 +90,12 @@ public class MapManager
     // 获取地图上某一个点的信息
     public int GetMapPoint(int x, int y)
     {
-        return curMap[x, y];
+        if (x < 0 || x >= curMap.GetLength(0) ||
+            y < 0 || y >= curMap.GetLength(1))
+        {
+            return -1;
+        }
+        return curMap[x, y]; 
     }
 
     // 拾取道具
@@ -99,7 +103,6 @@ public class MapManager
     {
         // 从数据层将道具拾取了 - 拾取到道具, 根据道具编号将信息存到字典中
         int oldNum = curMap[x, y]; // 道具的编号
-        Player.Instance.AddProp(oldNum);  // 玩家添加道具
         curMap[x, y] = 0;
         
         // 表现层将道具隐藏
@@ -107,26 +110,5 @@ public class MapManager
         {
             onPickUpEvent(x, y);
         }
-    }
-
-    // 开门的方法 - 返回 true 开门成功, 否则失败
-    public bool OpenDoor(int x, int y)
-    {
-        int doorNum = curMap[x, y]; // 根据坐标取到门的编号
-        Debug.Log("现在要开 " + (ObjType)doorNum);
-
-        // 先判断玩家有没有钥匙
-        if (Player.Instance.GetPropNum(doorNum + 1) > 0)
-        {
-            // 道具数量大于 0
-            curMap[x, y] = 0; // 门消失
-            Player.Instance.UserProp(doorNum + 1); // 使用一个道具
-            if (onOpenDoorEvent != null)
-            {
-                onOpenDoorEvent(x, y);
-            }
-            return true;
-        }
-        return false;
     }
 }

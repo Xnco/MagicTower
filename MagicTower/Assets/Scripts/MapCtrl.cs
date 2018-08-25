@@ -9,8 +9,7 @@ using UnityEngine;
 /// </summary>
 public class MapCtrl : MonoBehaviour
 {
-
-    Dictionary<ObjType, GameObject> allPrefabs; // 所有的预设
+    //Dictionary<ObjType, GameObject> allPrefabs; // 所有的预设
     GameObject[,] mapObjs; // 地图上所有的物体
 
     public int floor; // 初始的楼层
@@ -20,12 +19,11 @@ public class MapCtrl : MonoBehaviour
     {
         // 注册事件
         MapManager.GetSingle().onPickUpEvent += PickUpProp;
-        MapManager.GetSingle().onOpenDoorEvent += OpenDoor;
 
         mapObjs = new GameObject[8, 8];
 
         // 初始化
-        LoadPrefab(); // 加载预设
+        //LoadPrefab(); // 加载预设
         MapManager.GetSingle().LoadAllMap(); // 加载地图信息
 
         // 先生成背景(路)
@@ -35,24 +33,24 @@ public class MapCtrl : MonoBehaviour
     }
 
     // 加载预设
-    void LoadPrefab()
-    {
-        allPrefabs = new Dictionary<ObjType, GameObject>();
-        ObjType[] allValue = (ObjType[])Enum.GetValues(ObjType.None.GetType());
-        // 根据枚举加载所有的预设
-        for (int i = 0; i < allValue.Length; i++)
-        {
-            GameObject tmp = Resources.Load<GameObject>("Prefabs/" + allValue[i].ToString());
-            if (tmp != null)
-            {
-                allPrefabs.Add(allValue[i], tmp);
-            }
-            else
-            {
-                Debug.LogError(allValue[i].ToString() + " 加载失败");
-            }
-        }
-    }
+    //void LoadPrefab()
+    //{
+    //    allPrefabs = new Dictionary<ObjType, GameObject>();
+    //    ObjType[] allValue = (ObjType[])Enum.GetValues(ObjType.None.GetType());
+    //    // 根据枚举加载所有的预设
+    //    for (int i = 0; i < allValue.Length; i++)
+    //    {
+    //        GameObject tmp = Resources.Load<GameObject>("Prefabs/" + allValue[i].ToString());
+    //        if (tmp != null)
+    //        {
+    //            allPrefabs.Add(allValue[i], tmp);
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError(allValue[i].ToString() + " 加载失败");
+    //        }
+    //    }
+    //}
 
     // 生成背景(全是路)
     void CloneRoad()
@@ -79,41 +77,39 @@ public class MapCtrl : MonoBehaviour
         {
             for (int j = 0; j < map.GetLength(1); j++)
             {
-                GameObject tmpObj;
-                if (allPrefabs.TryGetValue((ObjType)map[i, j], out tmpObj))
-                {
-                    GameObject tmp = Instantiate(tmpObj);
-                    tmp.name = tmpObj.name;
-                    tmp.transform.SetParent(this.transform);
-                    tmp.transform.localScale = Vector3.one * 3.15f;
-                    tmp.transform.localPosition = new Vector3(j, -i, 0);
+                GameObject tmp = ObjectPool.Instance.GetObj((ObjType)map[i, j]);
+                tmp.transform.SetParent(this.transform);
+                tmp.transform.localScale = Vector3.one * 3.15f;
+                tmp.transform.localPosition = new Vector3(j, -i, 0);
 
-                    mapObjs[i, j] = tmp; // 生成的同时顺便储存
-                }
+                mapObjs[i, j] = tmp; // 生成的同时顺便储存
+
             }
         }
     }
 
+    // 拾取道具
     private void PickUpProp(int x, int y)
     {
         // 如何根据坐标将道具获取
         if (mapObjs[x, y] != null)
         {
-            mapObjs[x, y].SetActive(false);
+            mapObjs[x, y].GetComponent<PropCtrl>().BeUsed();
         }
     }
 
-    private void OpenDoor(int x, int y)
-    {
-        if (mapObjs[x, y] != null)
-        {
-            mapObjs[x, y].SetActive(false);
-        }
-    }
+    // 开门 - 暂弃用
+    //private void OpenDoor(int x, int y)
+    //{
+    //    if (mapObjs[x, y] != null)
+    //    {
+    //        //mapObjs[x, y].SetActive(false);
+    //        ObjectPool.Instance.SetObj(mapObjs[x, y]);
+    //    }
+    //}
 
     private void OnDestroy()
     {
         MapManager.GetSingle().onPickUpEvent -= PickUpProp;
-        MapManager.GetSingle().onOpenDoorEvent -= OpenDoor;
     }
 }

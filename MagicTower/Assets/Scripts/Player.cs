@@ -19,6 +19,20 @@ public class Player
 
     private Dictionary<int, int> allPropNum; // 只针对道具的数量
 
+    private int hp;
+
+    public int Hp
+    {
+        get
+        {
+            return hp;
+        }
+        set
+        {
+            hp = value;
+        }
+    }
+
     private Player()
     {
         allPropNum = new Dictionary<int, int>();
@@ -27,6 +41,7 @@ public class Player
     // 添加道具
     public void AddProp(int num)
     {
+        // 
         if (allPropNum.ContainsKey(num))
         {
             allPropNum[num]++; // 道具之前拾取过, 数量++
