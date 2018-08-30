@@ -94,7 +94,7 @@ public class MapCtrl : MonoBehaviour
         // 如何根据坐标将道具获取
         if (mapObjs[x, y] != null)
         {
-            mapObjs[x, y].GetComponent<PropCtrl>().BeUsed();
+            mapObjs[x, y].GetComponent<PropCtrl>().BePickUp();
         }
     }
 

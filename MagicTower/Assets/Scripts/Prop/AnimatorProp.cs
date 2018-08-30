@@ -14,7 +14,7 @@ public class AnimatorProp : PropCtrl {
         mAn = GetComponentInChildren<Animator>();
     }
 
-    public override void BeUsed()
+    public override void BePickUp()
     {
         //base.BeUsed();
         StartCoroutine(PlayAnimation());
@@ -24,6 +24,6 @@ public class AnimatorProp : PropCtrl {
     {
         mAn.SetTrigger(triggerName);
         yield return new WaitForSeconds(animationTime);
-        base.BeUsed();
+        base.BePickUp();
     }
 }

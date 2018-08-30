@@ -19,9 +19,15 @@ public class Player
 
     private Dictionary<int, int> allPropNum; // 只针对道具的数量
 
-    private int hp;
+    private float hp;
+    private float mp;
+    private float atk;
+    private float def;
+    private float gold;
+    private float exp;
+    private float level;
 
-    public int Hp
+    public float Hp
     {
         get
         {
@@ -30,6 +36,84 @@ public class Player
         set
         {
             hp = value;
+        }
+    }
+
+    public float Mp
+    {
+        get
+        {
+            return mp;
+        }
+
+        set
+        {
+            mp = value;
+        }
+    }
+
+    public float Atk
+    {
+        get
+        {
+            return atk;
+        }
+
+        set
+        {
+            atk = value;
+        }
+    }
+
+    public float Def
+    {
+        get
+        {
+            return def;
+        }
+
+        set
+        {
+            def = value;
+        }
+    }
+
+    public float Gold
+    {
+        get
+        {
+            return gold;
+        }
+
+        set
+        {
+            gold = value;
+        }
+    }
+
+    public float Exp
+    {
+        get
+        {
+            return exp;
+        }
+
+        set
+        {
+            exp = value;
+        }
+    }
+
+    public float Level
+    {
+        get
+        {
+            return level;
+        }
+
+        set
+        {
+            level = value;
         }
     }
 

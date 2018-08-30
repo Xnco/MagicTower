@@ -71,6 +71,38 @@ public class MapManager
         return map;
     }
 
+    // 保存所有地图 - 将二维数组转成 - txt
+    public void SavaAllMap()
+    {
+        // 根据 allMap 中的所有 int[,] 生成对应的txt
+        foreach (var item in allMap)
+        {
+            string path = Application.dataPath + "/Resources/Sava/Sava1/Map/" + item.Key + ".txt";
+            string content = SavaMap(item.Value);
+
+            File.WriteAllText(path, content);
+        }
+    }
+
+    private string SavaMap(int[,] tmpMap)
+    {
+        string content = "";
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 7; j++)
+            {
+                content += tmpMap[i, j] + ",";
+            }
+
+            content += tmpMap[i, 7];
+            if (i != 7)
+            {
+                content += "\n";
+            }
+        }
+        return content;
+    }
+
     // 读取某一层的地图
     public int[,] GetMap(int num)
     {

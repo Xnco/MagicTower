@@ -72,7 +72,6 @@ public class PlayerCtrl : MonoBehaviour {
     bool CanMove(int x, int y)
     {
         int result = MapManager.GetSingle().GetMapPoint(x, y);
-        Debug.Log("这边是" + result);
         // 越界
         if (result == -1) 
         {
