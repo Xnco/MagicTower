@@ -1,0 +1,8 @@
+0_0:GoUpstairs
+0_8:Wall1
+1_5:Wall1
+2_4:Wall1
+8_3:Slem
+8_9:Wall1
+10_0:YellowDoor
+10_7:Wall1
