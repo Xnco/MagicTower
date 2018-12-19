@@ -13,3 +13,6 @@ Resources文件夹中有魔塔游戏资源
 
 #### 游戏流程
 ![Image Text](https://github.com/Xnco/MagicTower/blob/master/Show/MTMain.gif)
+
+#### 地图编辑器
+![Image Text](https://github.com/Xnco/MagicTower/blob/master/Show/MTMap.gif)
