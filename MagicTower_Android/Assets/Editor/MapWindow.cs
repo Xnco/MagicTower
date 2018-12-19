@@ -24,7 +24,7 @@ public class MapWindow : EditorWindow {
         {
             EditorGUILayout.LabelField("地图编辑功能");
             floor = EditorGUILayout.IntField(floor); // 层数
-            if (File.Exists(Application.dataPath + "/Level/New/" + floor + ".txt"))
+            if (File.Exists(Application.streamingAssetsPath + "/Level/New/" + floor + ".txt"))
             {
                 GUI.contentColor = Color.red;
                 if (GUILayout.Button("地图文件已存在, 替换地图 (慎点)"))
@@ -43,7 +43,7 @@ public class MapWindow : EditorWindow {
             {
                 if (GUILayout.Button("生成地图文件"))
                 {
-                    CreateFileByMap();
+                    CreateFileByMap(); 
                 }
             }
             
@@ -74,7 +74,7 @@ public class MapWindow : EditorWindow {
         // 让 New 中的所有文本都改
 
         // 获取 Level 这个文件夹下的所有文件夹
-        string[] allDir = Directory.GetDirectories(Application.dataPath + "/Level/");
+        string[] allDir = Directory.GetDirectories(Application.streamingAssetsPath + "/Level/");
         foreach (var item in allDir)
         {
             //读取该文件夹下的所有 *.txt 的文件
@@ -126,7 +126,7 @@ public class MapWindow : EditorWindow {
             }
         }
 
-        string path = Application.dataPath + "/Level/New/" + floor + ".txt";
+        string path = Application.streamingAssetsPath + "/Level/New/" + floor + ".txt";
         File.WriteAllText(path, text);
     }
 
@@ -135,7 +135,7 @@ public class MapWindow : EditorWindow {
     {
         GameObject map = Selection.activeGameObject;
         // 读取一个本地文件 - 根据本地文件的 RoadName:ObjName
-        string[] allLines = File.ReadAllLines(Application.dataPath + "/Level/New/" + floor + ".txt");
+        string[] allLines = File.ReadAllLines(Application.streamingAssetsPath + "/Level/New/" + floor + ".txt");
         for (int i = 0; i < allLines.Length; i++)
         {
             string[] singleObj = allLines[i].Split(':'); // 根据 : 切割 

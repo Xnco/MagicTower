@@ -30,6 +30,7 @@ public class MTDoor : MTBase {
         if (player.GetKey(tmp) > 0)
         {
             // 开门动画
+            AudioManager.GetSingle().Play("5");
             mAn.SetTrigger("Trigger");
             player.ChangedKey(tmp, -1);
             isOpen = true;

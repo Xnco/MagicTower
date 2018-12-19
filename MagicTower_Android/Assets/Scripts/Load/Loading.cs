@@ -12,6 +12,10 @@ public class Loading : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        MapManager.GetSingle();
+
+        //Debug.Log(Application.streamingAssetsPath);
+        //Debug.Log(Application.persistentDataPath); 
         // 同步加载
         //File.ReadAllBytes();
         //GameObject go = Resources.Load<GameObject>("Prefab/Wall1");

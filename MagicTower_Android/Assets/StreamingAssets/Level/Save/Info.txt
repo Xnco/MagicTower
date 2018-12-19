@@ -1,4 +1,0 @@
-Floor:1
-PosX:0
-PosY:10
-HP:9950

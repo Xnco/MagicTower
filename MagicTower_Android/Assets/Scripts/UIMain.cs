@@ -22,48 +22,41 @@ public class UIMain : MonoBehaviour {
                 MapManager.GetSingle().Save();
 
                 // 保存楼层数
-                string content = "";
-                content += "Floor:" + curFloor + "\n"; // 保存当前的楼层数
                 // 主角的信息全部要保存
                 Player player = transform.Find("Player").GetComponent<Player>();
-                content += "PosX:" + player.pos.x + "\n";
-                content += "PosY:" + player.pos.y + "\n";
-                content += "HP:" + player.hp;
-                File.WriteAllText(Application.dataPath + "/Level/Save/Info.txt", content);
-                }
+                MapManager.GetSingle().SavePlayerAndFloor(curFloor, player);
+            }
          );
 
         Transform startBtn = transform.Find("Start");
         startBtn.GetComponent<Button>().onClick.AddListener(
             () =>
             {
-                MapManager.GetSingle().isNewGame = true;
-                InitMapByFloor(curFloor);
+                Dialog.instance.Open(
+                    "是否确定开始游戏?", 
+                    ()=>
+                    {
+                        MapManager.GetSingle().isNewGame = true;
+                        InitMapByFloor(curFloor);
+                    }
+                );
             }
             );
+
 
         Transform loadBtn = transform.Find("Load");
         loadBtn.GetComponent<Button>().onClick.AddListener(
             () => {
-                MapManager.GetSingle().isNewGame = false; // 改变加载地图的路径
-                // 加载当前的楼层
-                Dictionary<string, string> tmpInfo = new Dictionary<string, string>();
-                string[] contents = File.ReadAllLines(Application.dataPath + "/Level/Save/Info.txt");
-                for (int i = 0; i < contents.Length; i++)
+                Dialog.instance.Open("是否确定加载?", () =>
                 {
-                    string[] infos = contents[i].Split(':');
-                    tmpInfo.Add(infos[0], infos[1]);
-                }
+                    MapManager.GetSingle().isNewGame = false; // 改变加载地图的路径
+                    // 加载当前的楼层
+                    // Player
+                    Player player = transform.Find("Player").GetComponent<Player>();
+                    curFloor = MapManager.GetSingle().LoadPlayerAndFloor(player);
 
-                curFloor = int.Parse(tmpInfo["Floor"]);
-                // Player
-                int x = int.Parse(tmpInfo["PosX"]);
-                int y = int.Parse(tmpInfo["PosY"]);
-                Player player = transform.Find("Player").GetComponent<Player>();
-                player.pos = new Vector2(x, y);
-                player.SetPosition(x, y);
-
-                InitMapByFloor(curFloor);
+                    InitMapByFloor(curFloor);
+                });
             }
             );
     }

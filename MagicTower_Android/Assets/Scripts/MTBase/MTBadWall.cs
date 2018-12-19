@@ -16,6 +16,7 @@ public class MTBadWall : MTBase {
 
     public override bool Through(Player player)
     {
+        AudioManager.GetSingle().Play("4");
         RemoveObj();
         return true;
     }

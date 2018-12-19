@@ -17,6 +17,7 @@ public class MTWall : MTBase {
     public override bool Through(Player player)
     {
         //throw new System.NotImplementedException();
+        AudioManager.GetSingle().Play("1");
         return false;
     }
 }
